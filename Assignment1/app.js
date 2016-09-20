@@ -6,20 +6,21 @@ angular.module('LunchCheckapp', [])
 
 LunchCheckController.$inject=['$scope'];
 function LunchCheckController($scope) {
-  $scope.dishes = [];
-  $scope.Nodishes = $scope.dishes.length;
+    $scope.item = "";
+    $scope.Nodishes = $scope.item;
 
-  $scope.check = function () {
-    if ($scope.Nodishes == 1 || $scope.Nodishes == 3) {
-    	$scope.message = "Enjoy!";
-    }
-    else if ($scope.Nodishes > 3) {
-    	$scope.message = "Too much!";
-    }
-    else if($scope.Nodishes === 0 ) {
-    	$scope.message = "Please enter data first";
-    }
-  };
+    $scope.check = function () {
+	    if($scope.Nodishes == 0  || $scope.Nodishes == "") {
+	    	$scope.message = "Please enter data first";
+	    }
+	    else if ($scope.Nodishes.split(",").length <= 3) {
+	    	$scope.message = "Enjoy!";
+	    }
+	    else {
+	    	$scope.message = "Too much!";
+	    }
+
+    };
 }
 
 })();
