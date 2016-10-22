@@ -28,9 +28,7 @@ function AlreadyBoughtController(ShoppingListCheckOffService) {
     Bought.itemName = "";
     Bought.quantity = "";
 
-    Bought.boughtlist = function(){
-    	ShoppingListCheckOffService.boughtlist(Bought.itemName, Bought.quantity);
-    };
+    Bought.boughtlist = ShoppingListCheckOffService.getboughtlist();
    
 }
 
@@ -47,17 +45,18 @@ function ShoppingListCheckOffService(){
 	var boughtlist = [];
 
 	service.buylis = function(buyIndex){
+		boughtlist.push(buylist[buyIndex]);
 		buylist.splice(buyIndex, 1);
 	};
 
-	service.boughtlist = function(itemName, quantity){
-		var boughtlst = {itemName : itemName , quantity : quantity};
-		boughtlist.push(boughtlst);
-	};
 
 	service.getItems = function () {
     	return buylist;
-    };
+    	};
+	
+	service.getboughtlist = function () {
+    	return boughtlist;
+    	};
 
 }
 
