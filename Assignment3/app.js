@@ -4,12 +4,12 @@
 angular.module('NarrowItDownApp',[])
 .controller('NarrowItDownController',NarrowItDownController) //will wrap your search textbox and button as well as the list of found items.
 .service('MenuSearchService',MenuSearchService)
-.constant('ApiBasePath', "https://davids-restaurant.herokuapp.com/menu_items.json.")
-.dirctive('foundItems', foundItems);
+.constant('ApiBasePath', "https://davids-restaurant.herokuapp.com")
+.directive('foundItems', foundItems);
 
 function foundItems() {
   var ddo = {
-    templateUrl: 'loader/itemsloaderindicator.template.html',
+    templateUrl: '',
     scope: {
       items: '<',
       foundItems: '@title',
@@ -24,14 +24,31 @@ function foundItems() {
 }
 
 
+function foundItemsDirectiveController() {
+  var list = this;
+  
+}
+
 
 NarrowItDownController.$inject=['MenuSearchService'];
 function NarrowItDownController(MenuSearchService){
-	var menu = this;
+	var list = this;
+  list.itemName = "";
 
-	menu.matchitem = function(searchTerm){
-		MenuSearchService.getMatchedMenuItems(searchTerm);
+	list.matchitem = function(searchTerm){
+		var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
+
+    promise.then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
 	};
+
+  list.removeItem = function (itemIndex) {
+    foundItems.removeItem(itemIndex);
+  };
 
 }
 
@@ -41,28 +58,25 @@ MenuSearchService.$inject=['$http', 'ApiBasePath'];
 function MenuSearchService($http, ApiBasePath){
 	var service = this;
 
-	service.getMatchedMenuItems = function(searchTerm){
-	    return $http({method: "GET", url: (ApiBasePath)}, params: {category: searchTerm})
-	    .then(function (result) {
-	        var foundItems = [];
+  var found = [];
 
-	      // return processed items
-	        return foundItems;
-  	    });
-	}
+	service.getMatchedMenuItems = function(searchTerm){
+	    var response = $http({
+        method: "GET",
+        url: (ApiBasePath + "/menu_items.json"),
+        params: {category: searchTerm}
+      });
+
+      return response;
+
+	};
+
+  service.removeitem = function (itemIndex) {
+
+    found.splice(Index,1);
+
+  };
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 })();
