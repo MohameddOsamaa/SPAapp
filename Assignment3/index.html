@@ -12,19 +12,19 @@
    <div class="container">
     <h1>Narrow Down Your Chinese Menu Choice</h1>
 
-    <div class="form-group" ng-controller='NarrowItDownController as NIDC'>
-      <input type="text" placeholder="search term" class="form-control" ng-model="NIDC.itemName">
+    <div class="form-group" ng-controller='NarrowItDownController as NIDCtrl'>
+      <input type="text" placeholder="search term" class="form-control" ng-model="NIDCtrl.itemName">
     </div>
     <div class="form-group narrow-button">
-      <button class="btn btn-primary" ng-click="NIDC.matchitem($index);">Narrow It Down For Me!</button>
+      <button class="btn btn-primary" ng-click="NIDCtrl.matchitem(NIDCtrl.itemName);">Narrow It Down For Me!</button>
     </div>
 
+    <div ng-if="NIDCtrl.show" class="error">{{NIDCtrl.show}}</div>
+
     <!-- found-items should be implemented as a component -->
-    <found-items found-items="...."
-      items="NIDC.items"
-      title="{{NIDC.title}}"
-     on-remove="NIDC.removeitem(Index)">
-      
+    <found-items 
+      found-item="NIDCtrl.foundItems"
+      on-remove="NIDCtrl.removeitem(Index)">
     </found-items>
   </div>
 
