@@ -1,21 +1,10 @@
 (function(){
 
-	angular.module('data')
+	angular.module('MenuApp')
 	.component('categories',{
-		templetUrl: 'categories.template.html',
-		controller: CategoriesComponentController,
-		binding:{
+		templateUrl: 'src/menulist/templates/categories.template.html',
+		bindings:{
 			categories: '<'
 		}
 	});
-
-
-	CategoriesComponentController.$inject = ['MenuDataService','categories']
-	function CategoriesComponentController (MenuDataService,categories){
-
-		var categories = this;
-		category.categories = categories;
-
-	}
-
 })();
