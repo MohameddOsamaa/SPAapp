@@ -12,16 +12,16 @@
 		$stateProvider
 
 		//homepage
-		.state('home',{
+		.state('home', {
 			url:'/',
-			templeteUrl: 'src/menulist/templates/home.template.html'
+			templateUrl: 'src/menulist/templates/home.template.html'
 		})
 
-		//categories
+		// categories
 		.state('categories',{
 			url: '/categories',
-			templeteUrl: 'src/menulist/templates/categories.template.html',
-			controller: 'CategoriesComponentController as categories',
+			templateUrl: 'src/menulist/templates/categories.template.html',
+			controller: 'CategoriesController as categories',
 			resolve: {
 				categories: ['MenuDataService', function (MenuDataService) {
         		return MenuDataService.getAllCategories();
@@ -30,18 +30,18 @@
 		})
 
 
-		//itemlist
-		.state('items',{
-			url: '/items',
-			templeteUrl: 'src/menulist/templates/item-detail.template.html',
-			controller: 'ItemsComponentController as itemDetail',
-			resolve: {
-				items: ['MenuDataService', function (MenuDataService) {
-        		return MenuDataService.getItemsForCategory();
-				}]
-			}
+		// itemlist
+		// .state('items',{
+		// 	url: '/items',
+		// 	templateUrl: 'src/menulist/templates/item-detail.template.html',
+		// 	controller: 'ItemCtrl as itemDetail',
+		// 	resolve: {
+		// 		items: ['MenuDataService', function (MenuDataService) {
+  //       		return MenuDataService.getItemsForCategory();
+		// 		}]
+		// 	}
 
-		})
+		// })
 	}
 
 })();
