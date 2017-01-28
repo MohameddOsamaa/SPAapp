@@ -1,6 +1,10 @@
+<a ui-sref="home">Home</a><span>Categories</span>
+<h3>List of Categories</h3>
 <ul>
-  <li ng-repeat="item in $ctrl.categories"
-      ui-sref="categoriescategories.itemDetail({itemId: $index})">
-    {{ item.quantity }} of {{ item.name }}
-  </li>
+	<categories categories="categories.items"></categories>
 </ul>
+
+<ui-view></ui-view>
+
+
+
