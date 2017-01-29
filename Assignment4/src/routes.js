@@ -23,25 +23,25 @@
 			templateUrl: 'src/menulist/templates/categories.template.html',
 			controller: 'CategoriesController as categories',
 			resolve: {
-				categories: ['MenuDataService', function (MenuDataService) {
-        		return MenuDataService.getAllCategories();
+				items: ['MenuDataService', function (MenuDataService) {
+        			return MenuDataService.getAllCategories();
 				}]
 			}
 		})
 
 
 		// itemlist
-		// .state('items',{
-		// 	url: '/items',
-		// 	templateUrl: 'src/menulist/templates/item-detail.template.html',
-		// 	controller: 'ItemCtrl as itemDetail',
-		// 	resolve: {
-		// 		items: ['MenuDataService', function (MenuDataService) {
-  //       		return MenuDataService.getItemsForCategory();
-		// 		}]
-		// 	}
+		.state('items',{
+			url: '/items/{categoryShortName}',
+			templateUrl: 'src/menulist/templates/item-detail.template.html',
+			controller: 'ItemCtrl as itemDetail',
+			resolve: {
+				items: ['$stateParams','MenuDataService', function ($stateParams,MenuDataService) {
+        			return MenuDataService.getItemsForCategory($stateParams.categoryShortName);
+				}]
+			}
 
-		// })
+		})
 	}
 
 })();
