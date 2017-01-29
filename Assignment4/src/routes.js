@@ -31,10 +31,10 @@
 
 
 		// itemlist
-		.state('items',{
-			url: '/items/{categoryShortName}',
+		.state('categories.items',{
+			url: '/item/{categoryShortName}',
 			templateUrl: 'src/menulist/templates/item-detail.template.html',
-			controller: 'ItemCtrl as itemDetail',
+			controller: 'ItemsCtrl as itemsDetail',
 			resolve: {
 				items: ['$stateParams','MenuDataService', function ($stateParams,MenuDataService) {
         			return MenuDataService.getItemsForCategory($stateParams.categoryShortName);
